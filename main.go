@@ -6,27 +6,27 @@ import (
 )
 
 type Resistor struct {
-	piece int
-	value float32
+	Piece int
+	Value float32
 }
 
 type Leds struct {
-	piece int
-	color string
+	Piece int
+	Color string
 }
 
-type boards struct {
-	piece	    int
-	name	    string
-	hasEthernet bool
-	hasWifi	    bool
-	version     string
+type Boards struct {
+	Piece	    int
+	Name	    string
+	HasEthernet bool
+	HasWifi	    bool
+	Version     string
 }
 
-type jumperWires struct {
-	piece int
-	cm    float32
-	jtype string
+type JumperWires struct {
+	Piece int
+	Cm    float32
+	Jtype string
 }
 
 func main() {
