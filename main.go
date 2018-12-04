@@ -3,39 +3,27 @@ package main
 import (
 	"net/http"
 	"html/template"
+	"github.com/KNaiskes/electronics-list/resistor"
+	//"github.com/KNaiskes/electronics-list/led"
+	//"github.com/KNaiskes/electronics-list/board"
+	//"github.com/KNaiskes/electronics-list/jumberWire"
 )
 
-type Resistor struct {
-	Piece int
-	Value float32
-}
-
-type Leds struct {
-	Piece int
-	Color string
-}
-
-type Boards struct {
-	Piece	    int
-	Name	    string
-	HasEthernet bool
-	HasWifi	    bool
-	Version     string
-}
-
-type JumperWires struct {
-	Piece int
-	Cm    float32
-	Jtype string
-}
+var htmlDir = "src/github.com/KNaiskes/electronics-list/static/html/index.html"
 
 func main() {
 
 	http.HandleFunc("/", indexHandler)
+
+	http.Handle("/src/github.com/KNaiskes/electronics-list/static/css/",
+		http.StripPrefix("/src/github.com/KNaiskes/electronics-list/static/css/",
+	http.FileServer(http.Dir("src/github.com/KNaiskes/electronics-list/static/css/"))))
+
 	http.ListenAndServe(":8080", nil)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("static/index.html"))
-	tmpl.Execute(w, nil)
+	kr := resistor.Addresistor(32, 56.44)
+	tmpl := template.Must(template.ParseFiles(htmlDir))
+	tmpl.Execute(w, kr)
 }
