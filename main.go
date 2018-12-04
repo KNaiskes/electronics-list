@@ -5,6 +5,30 @@ import (
 	"html/template"
 )
 
+type Resistor struct {
+	piece int
+	value float32
+}
+
+type Leds struct {
+	piece int
+	color string
+}
+
+type boards struct {
+	piece	    int
+	name	    string
+	hasEthernet bool
+	hasWifi	    bool
+	version     string
+}
+
+type jumperWires struct {
+	piece int
+	cm    float32
+	jtype string
+}
+
 func main() {
 
 	http.HandleFunc("/", indexHandler)
