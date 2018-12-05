@@ -7,12 +7,14 @@ import (
 	//"github.com/KNaiskes/electronics-list/led"
 	//"github.com/KNaiskes/electronics-list/board"
 	//"github.com/KNaiskes/electronics-list/jumberWire"
+	"github.com/KNaiskes/electronics-list/database"
 )
 
 var htmlDir = "src/github.com/KNaiskes/electronics-list/static/html/index.html"
 
 func main() {
 
+	database.CreateDB()
 	http.HandleFunc("/", indexHandler)
 
 	http.Handle("/src/github.com/KNaiskes/electronics-list/static/css/",
