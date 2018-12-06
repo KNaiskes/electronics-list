@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"html/template"
+	"os"
 	"github.com/KNaiskes/electronics-list/resistor"
 	//"github.com/KNaiskes/electronics-list/led"
 	//"github.com/KNaiskes/electronics-list/board"
@@ -14,7 +15,11 @@ var htmlDir = "src/github.com/KNaiskes/electronics-list/static/html/index.html"
 
 func main() {
 
-	database.CreateDB()
+	if _, err := os.Stat(database.Dbdir); os.IsNotExist(err) {
+		os.MkdirAll(database.Dbdir, 0700)
+		database.CreateDB()
+	}
+
 	http.HandleFunc("/", indexHandler)
 
 	http.Handle("/src/github.com/KNaiskes/electronics-list/static/css/",

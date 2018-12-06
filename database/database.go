@@ -7,10 +7,12 @@ import (
 )
 
 const driverDB = "sqlite3"
-const dbDir  = "src/github.com/KNaiskes/electronics-list/db/components.db"
+const Dbdir  = "src/github.com/KNaiskes/electronics-list/db/"
+
+const dbName = Dbdir + "components.db"
 
 func newTable(driver string, query string) {
-	db, err := sql.Open(driver, dbDir)
+	db, err := sql.Open(driver, dbName)
 
 	if err != nil {
 		log.Fatal(err)
