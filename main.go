@@ -4,10 +4,6 @@ import (
 	"net/http"
 	"html/template"
 	"os"
-	"github.com/KNaiskes/electronics-list/resistor"
-	//"github.com/KNaiskes/electronics-list/led"
-	//"github.com/KNaiskes/electronics-list/board"
-	//"github.com/KNaiskes/electronics-list/jumberWire"
 	"github.com/KNaiskes/electronics-list/database"
 )
 
@@ -20,6 +16,11 @@ func main() {
 		database.CreateDB()
 	}
 
+	l := database.Leds{34, "red"}
+	//database.RemoveComponentDB(l)
+	//database.NewComponentDB(l)
+	database.UpdateComponent(l)
+
 	http.HandleFunc("/", indexHandler)
 
 	http.Handle("/src/github.com/KNaiskes/electronics-list/static/css/",
@@ -30,7 +31,6 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	kr := resistor.Addresistor(32, 56.44)
 	tmpl := template.Must(template.ParseFiles(htmlDir))
-	tmpl.Execute(w, kr)
+	tmpl.Execute(w, nil)
 }

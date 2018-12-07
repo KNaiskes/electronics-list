@@ -76,3 +76,65 @@ func CreateDB() {
 	newTable(driverDB, queryJumperWire)
 	newTable(driverDB, queryBoard)
 }
+
+func (l Leds) AddComponent() {
+	const query = `INSERT INTO leds(piece, color) VALUES(?,?)`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(l.Piece, l.Color)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (l Leds) DeleteComponent() {
+	const query = `DELETE FROM leds WHERE COLOR = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(l.Color) // delete by color for now just for testing
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (l Leds) ModifyComponent() {
+	const query = `UPDATE leds SET piece = ?, color = ? WHERE color = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(l.Piece, l.Color, "blue") // modify by color for now just for testing
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+// implementation of DatabaseInterface interface
+
+func NewComponentDB(d DatabaseInterface) {
+	d.AddComponent()
+}
+
+func RemoveComponentDB(d DatabaseInterface) {
+	d.DeleteComponent()
+}
+
+func UpdateComponent(d DatabaseInterface) {
+	d.ModifyComponent()
+}
