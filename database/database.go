@@ -30,10 +30,6 @@ type Resistor struct {
 	Value float32
 }
 
-func Addresistor(p int, v float32) Resistor {
-	return Resistor{Piece: p, Value: v}
-}
-
 type DatabaseInterface interface {
 	AddComponent()
 	DeleteComponent()
@@ -102,7 +98,7 @@ func (l Leds) DeleteComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(l.Color) // delete by color for now just for testing
+	statement.Exec(l.Color)
 
 	if err != nil {
 		log.Fatal(err)
@@ -118,7 +114,103 @@ func (l Leds) ModifyComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(l.Piece, l.Color, "blue") // modify by color for now just for testing
+	statement.Exec(l.Piece, l.Color, "blue")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (b Board) AddComponent() {
+	const query = `INSERT INTO boards(piece, name, ethernet, wifi, version) VALUES(?, ?, ?, ?, ?)`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement.err := db.Prepare(query)
+	statement.Exec(d.Piece, d.Name, d.HasEthernet, d.HasWifi, d.Version)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (b Board) DeleteComponent() {
+	const query = `DELETE FROM boards WHERE name = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(d.Name)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (b Board) ModifyComponent() {
+	const query = `UPDATE boards SET piece = ?, name = ?, ethernet = ?, wifi = ?, version = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(b.Piece, b.Name, b.HasEthernet, b.HasWifi, b.Version)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (j JumperWire) AddComponent() {
+	const query = `INSERT INTO jumberwires(piece, cm, type) VALUES(?, ?, ?)`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(j.Piece, j.Cm, j.Jtype)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (j JumperWire) DeleteComponent() {
+	const query = `DELETE FROM jumberwires WHERE type = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(j.Jtype)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (j JumperWire) ModifyComponent() {
+	const query = `UPDATE jumberwires SET piece = ?, cm = ?, type = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(j.Piece, j.Cm, j.Jtype)
 
 	if err != nil {
 		log.Fatal(err)
