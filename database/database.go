@@ -6,6 +6,40 @@ import (
 	"log"
 )
 
+type Leds struct {
+	Piece int
+	Color string
+}
+
+type Board struct {
+	Piece	    int
+	Name	    string
+	HasEthernet bool
+	HasWifi	    bool
+	Version     string
+}
+
+type JumperWire struct {
+	Piece int
+	Cm    float32
+	Jtype string
+}
+
+type Resistor struct {
+	Piece int
+	Value float32
+}
+
+func Addresistor(p int, v float32) Resistor {
+	return Resistor{Piece: p, Value: v}
+}
+
+type DatabaseInterface interface {
+	AddComponent()
+	DeleteComponent()
+	ModifyComponent()
+}
+
 const driverDB = "sqlite3"
 const Dbdir  = "src/github.com/KNaiskes/electronics-list/db/"
 
