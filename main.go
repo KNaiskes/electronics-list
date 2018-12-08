@@ -16,10 +16,6 @@ func main() {
 		database.CreateDB()
 	}
 
-	j := database.JumperWire{20, 5, "male-male"}
-
-	database.RemoveComponentDB(j)
-
 	http.HandleFunc("/", indexHandler)
 
 	http.Handle("/src/github.com/KNaiskes/electronics-list/static/css/",
