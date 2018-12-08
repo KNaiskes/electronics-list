@@ -217,6 +217,54 @@ func (j JumperWire) ModifyComponent() {
 	}
 }
 
+func (r Resistor) AddComponent() {
+	const query = `INSERT INTO resistors(piece, value) VALUES(?,?)`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(r.Piece, r.Value)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (r Resistor) DeleteComponent() {
+	const query = `DELETE FROM resistors WHERE value = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(r.Value)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (r Resistor) ModifyComponent() {
+	const query = `UPDATE resistors SET piece = ?, value = ?`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	statement, err := db.Prepare(query)
+	statement.Exec(r.Piece, r.Value)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 // implementation of DatabaseInterface interface
 
 func NewComponentDB(d DatabaseInterface) {
