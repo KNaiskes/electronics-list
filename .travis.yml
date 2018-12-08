@@ -11,4 +11,4 @@ notifications:
 
 before_script:
   - go get -d ./...
-  - go install github.com/KNaiskes/electronics-list/main
+  - go install github.com/KNaiskes/electronics-list/
