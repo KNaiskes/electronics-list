@@ -16,10 +16,9 @@ func main() {
 		database.CreateDB()
 	}
 
-	l := database.Leds{34, "red"}
-	//database.RemoveComponentDB(l)
-	//database.NewComponentDB(l)
-	database.UpdateComponent(l)
+	j := database.JumperWire{20, 5, "male-male"}
+
+	database.RemoveComponentDB(j)
 
 	http.HandleFunc("/", indexHandler)
 

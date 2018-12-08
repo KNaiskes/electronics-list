@@ -129,8 +129,8 @@ func (b Board) AddComponent() {
 		log.Fatal(err)
 	}
 
-	statement.err := db.Prepare(query)
-	statement.Exec(d.Piece, d.Name, d.HasEthernet, d.HasWifi, d.Version)
+	statement, err := db.Prepare(query)
+	statement.Exec(b.Piece, b.Name, b.HasEthernet, b.HasWifi, b.Version)
 
 	if err != nil {
 		log.Fatal(err)
@@ -146,7 +146,7 @@ func (b Board) DeleteComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(d.Name)
+	statement.Exec(b.Name)
 
 	if err != nil {
 		log.Fatal(err)
@@ -154,7 +154,7 @@ func (b Board) DeleteComponent() {
 }
 
 func (b Board) ModifyComponent() {
-	const query = `UPDATE boards SET piece = ?, name = ?, ethernet = ?, wifi = ?, version = ?`
+	const query = `UPDATE boards SET piece = ?, name = ?, ethernet = ?, wifi = ?, version = ? WHERE name = ?`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -162,7 +162,7 @@ func (b Board) ModifyComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(b.Piece, b.Name, b.HasEthernet, b.HasWifi, b.Version)
+	statement.Exec(b.Piece, b.Name, b.HasEthernet, b.HasWifi, b.Version, "Raspberry Pi") // just for testing
 
 	if err != nil {
 		log.Fatal(err)
