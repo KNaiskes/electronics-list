@@ -33,7 +33,7 @@ type Resistor struct {
 type DatabaseInterface interface {
 	AddComponent()
 	DeleteComponent()
-	ModifyComponent()
+	ModifyComponent(m string)
 }
 
 const driverDB = "sqlite3"
@@ -105,7 +105,7 @@ func (l Leds) DeleteComponent() {
 	}
 }
 
-func (l Leds) ModifyComponent() {
+func (l Leds) ModifyComponent(m string) {
 	const query = `UPDATE leds SET piece = ?, color = ? WHERE color = ?`
 
 	db, err := sql.Open(driverDB, dbName)
@@ -114,7 +114,7 @@ func (l Leds) ModifyComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(l.Piece, l.Color, "blue")
+	statement.Exec(l.Piece, l.Color, m)
 
 	if err != nil {
 		log.Fatal(err)
@@ -122,7 +122,8 @@ func (l Leds) ModifyComponent() {
 }
 
 func (b Board) AddComponent() {
-	const query = `INSERT INTO boards(piece, name, ethernet, wifi, version) VALUES(?, ?, ?, ?, ?)`
+	const query = `INSERT INTO boards(piece, name, ethernet, wifi, version)
+				VALUES(?, ?, ?, ?, ?)`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -153,8 +154,9 @@ func (b Board) DeleteComponent() {
 	}
 }
 
-func (b Board) ModifyComponent() {
-	const query = `UPDATE boards SET piece = ?, name = ?, ethernet = ?, wifi = ?, version = ? WHERE name = ?`
+func (b Board) ModifyComponent(m string) {
+	const query = `UPDATE boards SET piece = ?, name = ?, ethernet = ?,
+				wifi = ?, version = ? WHERE name = ?`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -162,7 +164,7 @@ func (b Board) ModifyComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(b.Piece, b.Name, b.HasEthernet, b.HasWifi, b.Version, "Raspberry Pi") // just for testing
+	statement.Exec(b.Piece, b.Name, b.HasEthernet, b.HasWifi, b.Version, m)
 
 	if err != nil {
 		log.Fatal(err)
@@ -201,8 +203,9 @@ func (j JumperWire) DeleteComponent() {
 	}
 }
 
-func (j JumperWire) ModifyComponent() {
-	const query = `UPDATE jumberwires SET piece = ?, cm = ?, type = ?`
+func (j JumperWire) ModifyComponent(m string) {
+	const query = `UPDATE jumberwires SET piece = ?, cm = ?,
+				type = ? WHERE TYPE = ?`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -210,7 +213,7 @@ func (j JumperWire) ModifyComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(j.Piece, j.Cm, j.Jtype)
+	statement.Exec(j.Piece, j.Cm, j.Jtype, m)
 
 	if err != nil {
 		log.Fatal(err)
@@ -249,7 +252,7 @@ func (r Resistor) DeleteComponent() {
 	}
 }
 
-func (r Resistor) ModifyComponent() {
+func (r Resistor) ModifyComponent(m string) {
 	const query = `UPDATE resistors SET piece = ?, value = ?`
 
 	db, err := sql.Open(driverDB, dbName)
@@ -258,7 +261,7 @@ func (r Resistor) ModifyComponent() {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(r.Piece, r.Value)
+	statement.Exec(r.Piece, m)
 
 	if err != nil {
 		log.Fatal(err)
@@ -275,6 +278,6 @@ func RemoveComponentDB(d DatabaseInterface) {
 	d.DeleteComponent()
 }
 
-func UpdateComponent(d DatabaseInterface) {
-	d.ModifyComponent()
+func UpdateComponent(d DatabaseInterface, m string) {
+	d.ModifyComponent(m)
 }
