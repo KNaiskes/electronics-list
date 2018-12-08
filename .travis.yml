@@ -1,0 +1,14 @@
+language: go
+
+go:
+  - 1.11
+
+git:
+  depth: 1
+
+notifications:
+  email: true
+
+before_script:
+  - go get -d ./...
+  - go install github.com/KNaiskes/electronics-list/main
