@@ -34,6 +34,7 @@ type DatabaseInterface interface {
 	AddComponent()
 	DeleteComponent()
 	ModifyComponent(m string)
+	GetComponent() interface{}
 }
 
 const driverDB = "sqlite3"
@@ -119,6 +120,91 @@ func (l Leds) ModifyComponent(m string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func (l Leds) GetComponent() interface{}  {
+	const query = `SELECT piece, color FROM leds`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	leds := []Leds{}
+	var (
+		piece int
+		color string
+	)
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for rows.Next() {
+		rows.Scan(&piece, &color)
+		temp := Leds{piece, color}
+		leds = append(leds, temp)
+	}
+
+	return leds
+}
+
+func (b Board) GetComponent() interface{} {
+	const query = `SELECT piece, name, ethernet, wifi, version FROM boards`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	boards := []Board{}
+	var (
+		piece    int
+		name     string
+		ethernet bool
+		wifi     bool
+		version  string
+	)
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for rows.Next() {
+		rows.Scan(&piece, &name, &ethernet, &wifi, &version)
+		temp := Board{piece, name, ethernet, wifi, version}
+		boards = append(boards, temp)
+	}
+
+	return boards
+}
+
+func (j JumperWire) GetComponent() interface{} {
+	const query = `SELECT piece, cm, type FROM jumberwires`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	jumperwires := []JumperWire{}
+	var (
+		piece int
+		cm    float32
+		jtype string
+	)
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for rows.Next() {
+		rows.Scan(&piece, &cm, &jtype)
+		temp := JumperWire{piece, cm, jtype}
+		jumperwires = append(jumperwires, temp)
+	}
+
+	return jumperwires
 }
 
 func (b Board) AddComponent() {
@@ -280,4 +366,8 @@ func RemoveComponentDB(d DatabaseInterface) {
 
 func UpdateComponent(d DatabaseInterface, m string) {
 	d.ModifyComponent(m)
+}
+
+func ListComponent(l DatabaseInterface) interface{} {
+	return l.GetComponent()
 }
