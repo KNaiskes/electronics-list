@@ -306,6 +306,33 @@ func (j JumperWire) ModifyComponent(m string) {
 	}
 }
 
+func (r Resistor) GetComponent() interface{} {
+	const query = `SELECT piece, value FROM resistors`
+
+	db, err := sql.Open(driverDB, dbName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	resistors := []Resistor{}
+	var (
+		piece int
+		value float32
+	)
+	rows, err := db.Query(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for rows.Next() {
+		rows.Scan(&piece, &value)
+		temp := Resistor{piece, value}
+		resistors = append(resistors, temp)
+	}
+
+	return resistors
+}
+
 func (r Resistor) AddComponent() {
 	const query = `INSERT INTO resistors(piece, value) VALUES(?,?)`
 
