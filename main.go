@@ -7,6 +7,14 @@ import (
 	"github.com/KNaiskes/electronics-list/database"
 )
 
+type Components struct {
+	// any new component type must be added here
+	Leds        interface{}
+	Board       interface{}
+	Jumperwire  interface{}
+	Resistor    interface{}
+}
+
 var htmlDir = "src/github.com/KNaiskes/electronics-list/static/html/index.html"
 
 func main() {
@@ -26,6 +34,18 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	var(
+		l = database.Leds{}
+		b = database.Board{}
+		j = database.JumperWire{}
+		re = database.Resistor{}
+	)
+
+	components := Components{ Leds: database.ListComponent(l),
+		Board: database.ListComponent(b),
+		Jumperwire: database.ListComponent(j),
+		Resistor: database.ListComponent(re) }
+
 	tmpl := template.Must(template.ParseFiles(htmlDir))
-	tmpl.Execute(w, nil)
+	tmpl.Execute(w, components)
 }
