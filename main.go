@@ -16,6 +16,7 @@ type Components struct {
 }
 
 var htmlDir = "src/github.com/KNaiskes/electronics-list/static/html/index.html"
+var temp = "src/github.com/KNaiskes/electronics-list/static/html/components.html"
 
 func main() {
 
@@ -25,6 +26,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/components", componentsHandler)
 
 	http.Handle("/src/github.com/KNaiskes/electronics-list/static/css/",
 		http.StripPrefix("/src/github.com/KNaiskes/electronics-list/static/css/",
@@ -34,6 +36,12 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.ParseFiles(htmlDir))
+	tmpl.Execute(w, nil)
+}
+
+func componentsHandler(w http.ResponseWriter, r *http.Request) {
 	var(
 		l = database.Leds{}
 		b = database.Board{}
@@ -46,6 +54,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		Jumperwire: database.ListComponent(j),
 		Resistor: database.ListComponent(re) }
 
-	tmpl := template.Must(template.ParseFiles(htmlDir))
+	tmpl := template.Must(template.ParseFiles(temp))
 	tmpl.Execute(w, components)
 }
