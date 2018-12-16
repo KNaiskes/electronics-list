@@ -1,3 +1,27 @@
 h1 {
 	color: blue;
 }
+
+
+#componentsTables table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#componentsTables td,th {
+	font-weight: bold;
+	font-size: 18px;
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+#componentsTables tr:nth-child(even) {
+	background-color: #808080;
+}
+
+#componentsTables p {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
