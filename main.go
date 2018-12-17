@@ -7,6 +7,12 @@ import (
 	"github.com/KNaiskes/electronics-list/database"
 )
 
+var tmpl *template.Template
+
+func init() {
+	tmpl = template.Must(template.ParseGlob("src/github.com/KNaiskes/electronics-list/static/html/*.html"))
+}
+
 type Components struct {
 	// any new component type must be added here
 	Leds        interface{}
@@ -14,9 +20,6 @@ type Components struct {
 	Jumperwire  interface{}
 	Resistor    interface{}
 }
-
-var htmlDir = "src/github.com/KNaiskes/electronics-list/static/html/index.html"
-var temp = "src/github.com/KNaiskes/electronics-list/static/html/components.html"
 
 func main() {
 
@@ -37,8 +40,7 @@ func main() {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
-	tmpl := template.Must(template.ParseFiles(htmlDir))
-	tmpl.Execute(w, nil)
+	tmpl.ExecuteTemplate(w, "index.html", nil)
 }
 
 func componentsHandler(w http.ResponseWriter, r *http.Request) {
@@ -54,6 +56,5 @@ func componentsHandler(w http.ResponseWriter, r *http.Request) {
 		Jumperwire: database.ListComponent(j),
 		Resistor: database.ListComponent(re) }
 
-	tmpl := template.Must(template.ParseFiles(temp))
-	tmpl.Execute(w, components)
+		tmpl.ExecuteTemplate(w, "components.html", components)
 }
