@@ -33,9 +33,9 @@ func main() {
 	http.HandleFunc("/add_component", addComponentHandler)
 	http.HandleFunc("/remove_component", removeComponentHandler)
 
-	http.Handle("/src/github.com/KNaiskes/electronics-list/static/css/",
-		http.StripPrefix("/src/github.com/KNaiskes/electronics-list/static/css/",
-	http.FileServer(http.Dir("src/github.com/KNaiskes/electronics-list/static/css/"))))
+	http.Handle("/src/github.com/KNaiskes/electronics-list/static/",
+		http.StripPrefix("/src/github.com/KNaiskes/electronics-list/static/",
+	http.FileServer(http.Dir("src/github.com/KNaiskes/electronics-list/static/"))))
 
 	http.ListenAndServe(":8080", nil)
 }
