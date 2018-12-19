@@ -21,13 +21,13 @@ type Board struct {
 
 type JumperWire struct {
 	Piece int
-	Cm    float32
+	Cm    float64
 	Jtype string
 }
 
 type Resistor struct {
 	Piece int
-	Value float32
+	Value float64
 }
 
 type DatabaseInterface interface {
@@ -190,7 +190,7 @@ func (j JumperWire) GetComponent() interface{} {
 	jumperwires := []JumperWire{}
 	var (
 		piece int
-		cm    float32
+		cm    float64
 		jtype string
 	)
 	rows, err := db.Query(query)
@@ -317,7 +317,7 @@ func (r Resistor) GetComponent() interface{} {
 	resistors := []Resistor{}
 	var (
 		piece int
-		value float32
+		value float64
 	)
 	rows, err := db.Query(query)
 	if err != nil {

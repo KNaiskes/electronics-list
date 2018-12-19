@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"html/template"
 	"os"
+	"strconv"
 	"github.com/KNaiskes/electronics-list/database"
 )
 
@@ -62,6 +63,60 @@ func componentsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func addComponentHandler(w http.ResponseWriter, r *http.Request) {
+	whichForm := r.FormValue("submit")
+
+	switch(whichForm) {
+	case "Submit_Led":
+		pieces := r.FormValue("pieces")
+		color  := r.FormValue("color")
+
+		piecesInt, _ := strconv.Atoi(pieces)
+
+		led := database.Leds{Piece: piecesInt, Color: color}
+		database.NewComponentDB(led)
+		break
+	case "Submit_Board":
+		pieces   := r.FormValue("pieces")
+		name     := r.FormValue("name")
+		ethernet := r.FormValue("ethernet")
+		wifi     := r.FormValue("wifi")
+		version  := r.FormValue("version")
+
+		piecesInt, _    := strconv.Atoi(pieces)
+		ethernetBool, _ := strconv.ParseBool(ethernet)
+		wifiBool, _     := strconv.ParseBool(wifi)
+
+		board := database.Board{Piece: piecesInt, Name: name,
+				HasEthernet: ethernetBool, HasWifi: wifiBool,
+				Version: version}
+		database.NewComponentDB(board)
+		break
+	case "Submit_Jumper":
+		pieces := r.FormValue("pieces")
+		cm     := r.FormValue("cm")
+		jtype  := r.FormValue("type")
+
+		piecesInt, _ := strconv.Atoi(pieces)
+		cmFloat, _   := strconv.ParseFloat(cm, 32)
+
+		jumperWire := database.JumperWire{Piece: piecesInt,
+				Cm: cmFloat, Jtype: jtype}
+		database.NewComponentDB(jumperWire)
+		break
+	case "Submit_resistor":
+		pieces := r.FormValue("pieces")
+		value  := r.FormValue("value")
+
+		piecesInt, _  := strconv.Atoi(pieces)
+		valueFloat, _ := strconv.ParseFloat(value, 32)
+
+		resistor := database.Resistor{Piece: piecesInt,
+				Value: valueFloat}
+
+		database.NewComponentDB(resistor)
+		break
+	}
+
 	tmpl.ExecuteTemplate(w, "add_component.html", nil)
 }
 
