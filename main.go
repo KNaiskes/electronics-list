@@ -33,6 +33,7 @@ func main() {
 	http.HandleFunc("/components", componentsHandler)
 	http.HandleFunc("/add_component", addComponentHandler)
 	http.HandleFunc("/remove_component", removeComponentHandler)
+	http.HandleFunc("/update_component", updateComponentHandler)
 
 	http.Handle("/src/github.com/KNaiskes/electronics-list/static/",
 		http.StripPrefix("/src/github.com/KNaiskes/electronics-list/static/",
@@ -148,4 +149,8 @@ func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 	tmpl.ExecuteTemplate(w, "remove_component.html", nil)
+}
+
+func updateComponentHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "modify_component.html", nil)
 }
