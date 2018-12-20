@@ -121,5 +121,31 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
+	whichForm := r.FormValue("submit")
+
+	switch(whichForm) {
+		case "Submit_Led":
+			color := r.FormValue("color")
+			led := database.Leds{Color: color}
+			database.RemoveComponentDB(led)
+			break
+		case "Submit_Board":
+			name := r.FormValue("name")
+			board := database.Board{Name: name}
+			database.RemoveComponentDB(board)
+			break
+		case "Submit_Jumper":
+			jtype := r.FormValue("type")
+			jumperWire := database.JumperWire{Jtype: jtype}
+			database.RemoveComponentDB(jumperWire)
+			break
+		case "Submit_resistor":
+			value := r.FormValue("value")
+			valueFloat, _ := strconv.ParseFloat(value, 32)
+			resistor := database.Resistor{Value: valueFloat}
+			database.RemoveComponentDB(resistor)
+			break
+		}
+
 	tmpl.ExecuteTemplate(w, "remove_component.html", nil)
 }
