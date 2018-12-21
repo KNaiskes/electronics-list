@@ -366,7 +366,7 @@ func (r Resistor) DeleteComponent() {
 }
 
 func (r Resistor) ModifyComponent(m string) {
-	const query = `UPDATE resistors SET piece = ?, value = ?`
+	const query = `UPDATE resistors SET piece = ?, value = ? WHERE value = ?`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -374,7 +374,7 @@ func (r Resistor) ModifyComponent(m string) {
 	}
 
 	statement, err := db.Prepare(query)
-	statement.Exec(r.Piece, m)
+	statement.Exec(r.Piece, r.Value, m)
 
 	if err != nil {
 		log.Fatal(err)
