@@ -152,5 +152,71 @@ func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateComponentHandler(w http.ResponseWriter, r *http.Request) {
+	whichForm := r.FormValue("submit")
+
+	switch(whichForm) {
+	case "Submit_Led":
+		color       := r.FormValue("color")
+		updateColor := r.FormValue("updatedColor")
+		pieces      := r.FormValue("pieces")
+
+		piecesInt, _ := strconv.Atoi(pieces)
+
+		led := database.Leds{Piece: piecesInt, Color: updateColor}
+		database.UpdateComponent(led, color)
+		break
+	case "Submit_Board":
+		name       := r.FormValue("name")
+		pieces     := r.FormValue("pieces")
+		ethernet   := r.FormValue("ethernet")
+		wifi       := r.FormValue("wifi")
+		version    := r.FormValue("version")
+		updateName := r.FormValue("updatedName")
+
+		piecesInt, _    := strconv.Atoi(pieces)
+		ethernetBool, _ := strconv.ParseBool(ethernet)
+		wifiBool, _     := strconv.ParseBool(wifi)
+
+		board := database.Board{Piece: piecesInt, Name: updateName,
+				HasEthernet: ethernetBool, HasWifi: wifiBool,
+				Version: version}
+		database.UpdateComponent(board, name)
+		break
+	case "Submit_Jumper":
+		updatedType := r.FormValue("updateType")
+		pieces      := r.FormValue("pieces")
+		cm          := r.FormValue("cm")
+		jtype       := r.FormValue("type")
+
+		piecesInt, _ := strconv.Atoi(pieces)
+		cmFloat, _   := strconv.ParseFloat(cm, 32)
+
+		jumperWire := database.JumperWire{Piece: piecesInt,
+				Cm: cmFloat, Jtype: updatedType}
+		database.UpdateComponent(jumperWire, jtype)
+		break
+	case "Submit_resistor":
+		pieces := r.FormValue("pieces")
+		value  := r.FormValue("value")
+		updatedValue := r.FormValue("updateValue")
+
+		piecesInt, _ := strconv.Atoi(pieces)
+		updatedValueFloat, _ := strconv.ParseFloat(updatedValue, 32)
+
+		//pieces := r.FormValue("pieces")
+		//value  := r.FormValue("value")
+		//updatedValue := r.FormValue("updateValue")
+
+		//piecesInt, _          := strconv.Atoi(pieces)
+		////valueFloat, _         := strconv.ParseFloat(value, 32)
+		//updadateValueFloat, _ := strconv.ParseFloat(updatedValue, 32)
+
+		resistor := database.Resistor{Piece: piecesInt,
+				Value: updatedValueFloat}
+
+		database.UpdateComponent(resistor, value)
+		break
+	}
+
 	tmpl.ExecuteTemplate(w, "modify_component.html", nil)
 }
