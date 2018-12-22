@@ -61,7 +61,7 @@ func CreateDB() {
 		  piece INTEGER, color TEXT)`
 	const queryResistor = `CREATE TABLE IF NOT EXISTS resistors
 			       (id INTEGER PRIMARY KEY, piece INTEGER, value REAL)`
-	const queryJumperWire = `CREATE TABLE IF NOT EXISTS jumberwires
+	const queryJumperWire = `CREATE TABLE IF NOT EXISTS jumperwires
 				 (id INTEGER PRIMARY KEY, piece INTEGER, cm REAL,
 				 type TEXT)`
 	const queryBoard = `CREATE TABLE IF NOT EXISTS boards
@@ -180,7 +180,7 @@ func (b Board) GetComponent() interface{} {
 }
 
 func (j JumperWire) GetComponent() interface{} {
-	const query = `SELECT piece, cm, type FROM jumberwires`
+	const query = `SELECT piece, cm, type FROM jumperwires`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -258,7 +258,7 @@ func (b Board) ModifyComponent(m string) {
 }
 
 func (j JumperWire) AddComponent() {
-	const query = `INSERT INTO jumberwires(piece, cm, type) VALUES(?, ?, ?)`
+	const query = `INSERT INTO jumperwires(piece, cm, type) VALUES(?, ?, ?)`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -274,7 +274,7 @@ func (j JumperWire) AddComponent() {
 }
 
 func (j JumperWire) DeleteComponent() {
-	const query = `DELETE FROM jumberwires WHERE type = ?`
+	const query = `DELETE FROM jumperwires WHERE type = ?`
 
 	db, err := sql.Open(driverDB, dbName)
 	if err != nil {
@@ -290,7 +290,7 @@ func (j JumperWire) DeleteComponent() {
 }
 
 func (j JumperWire) ModifyComponent(m string) {
-	const query = `UPDATE jumberwires SET piece = ?, cm = ?,
+	const query = `UPDATE jumperwires SET piece = ?, cm = ?,
 				type = ? WHERE TYPE = ?`
 
 	db, err := sql.Open(driverDB, dbName)
