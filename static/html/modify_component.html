@@ -1,145 +1,145 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="src/github.com/
-							KNaiskes/electronics-list/
-							static/css/style.css">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="src/github.com/
+        KNaiskes/electronics-list/
+        static/css/style.css">
 
-		<script src="src/github.com/KNaiskes/electronics-list/static/
-				js/script.js"></script>
+        <script src="src/github.com/KNaiskes/electronics-list/static/
+        js/script.js"></script>
 
-		<title> Update Component </title>
-<style>
+        <title> Update Component </title>
+        <style>
 #ledForm, #boardForm, #jumperwireForm, #resistorForm  { display: none; }
-</style>
-	</head>
+        </style>
+    </head>
 
-	<body>
-		<h4> Update Component </h4>
-		<button onclick = "hideForm('ledForm')"> Led </button>
-		<button onclick = "hideForm('boardForm')"> Board </button>
-		<button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
-		<button onclick = "hideForm('resistorForm')"> Resistor </button>
+    <body>
+        <h4> Update Component </h4>
+        <button onclick = "hideForm('ledForm')"> Led </button>
+        <button onclick = "hideForm('boardForm')"> Board </button>
+        <button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
+        <button onclick = "hideForm('resistorForm')"> Resistor </button>
 
-		<div id = "ledForm">
-			<form action="" method="POST">
-				<p>
-				<h4> Enter led's color that you wan to update </h4>
-				<input type="text" placeholder="Color"
-						   name="color" value="" required>
-				</p>
-				<p>
-				<h4> Update pieces: </h4>
-				<input type="text" placeholder="Update pieces"
-						   name="pieces" value=""
-								    required>
-				</p>
-				<h4> Update color: </h4>
-				<input type="text" placeholder="Update color"
-						   name="updatedColor" value=""
-								       required>
-				</p>
-				<p>
-				<input type="submit" value="Submit_Led" name="submit">
-				</p>
-			</form>
-		</div>
+        <div id = "ledForm">
+            <form action="" method="POST">
+                <p>
+                <h4> Enter led's color that you wan to update </h4>
+                <input type="text" placeholder="Color"
+                                   name="color" value="" required>
+                </p>
+                <p>
+                <h4> Update pieces: </h4>
+                <input type="text" placeholder="Update pieces"
+                                   name="pieces" value=""
+                                                 required>
+                </p>
+                <h4> Update color: </h4>
+                <input type="text" placeholder="Update color"
+                                   name="updatedColor" value=""
+                                                       required>
+                </p>
+                <p>
+                <input type="submit" value="Submit_Led" name="submit">
+                </p>
+            </form>
+        </div>
 
-		<div id = "boardForm">
-			<form action="" method="POST">
-				<p>
-				<h4> Enter board's name that you want to update </h4> 
-				<input type="text" placeholder="Name"
-						   name="name" value="" required>
-				</p>
-				<p>
-				<h4> Update pieces </h4>
-				<input type="text" placeholder="Update pieces"
-						   name="pieces" value="" required>
-				</p>
-				<p>
-				<h4> Update name </h4>
-				<input type="text" placeholder="Update Name"
-						   name="updatedName" value=""
-								      required>
-				</p>
-				<p>
-				<h4> Ethernet value: </h4>
-				<input type="text" placeholder="Update ethernet"
-						   name="ethernet" value=""
-								   required>
-				</p>
-				<p>
-				<h4> WiFi value: </h4>
-				<input type="text" placeholder="Update WiFi"
-						   name="wifi" value="" required>
-				</p>
-				<p>
-				<h4> Update version: </h4>
-				<input type="text" placeholder="Update version"
-						   name="version" value="" required>
-				</p>
-				<p>
-				<input type="submit" value="Submit_Board" name="submit">
-				</p>
-			</form>
-		</div>
+        <div id = "boardForm">
+            <form action="" method="POST">
+                <p>
+                <h4> Enter board's name that you want to update </h4> 
+                <input type="text" placeholder="Name"
+                                   name="name" value="" required>
+                </p>
+                <p>
+                <h4> Update pieces </h4>
+                <input type="text" placeholder="Update pieces"
+                                   name="pieces" value="" required>
+                </p>
+                <p>
+                <h4> Update name </h4>
+                <input type="text" placeholder="Update Name"
+                                   name="updatedName" value=""
+                                                      required>
+                </p>
+                <p>
+                <h4> Ethernet value: </h4>
+                <input type="text" placeholder="Update ethernet"
+                                   name="ethernet" value=""
+                                                   required>
+                </p>
+                <p>
+                <h4> WiFi value: </h4>
+                <input type="text" placeholder="Update WiFi"
+                                   name="wifi" value="" required>
+                </p>
+                <p>
+                <h4> Update version: </h4>
+                <input type="text" placeholder="Update version"
+                                   name="version" value="" required>
+                </p>
+                <p>
+                <input type="submit" value="Submit_Board" name="submit">
+                </p>
+            </form>
+        </div>
 
-		<div id = "jumperwireForm">
-			<form action="" method="POST">
-				<p>
-				<h4> Enter Jumper's wire type that you want to update </h4>
-				<input type="text" placeholder="Type"
-						   name="type" value="" required>
-				</p>
-				<p>
-				<h4> Update pieces: </h4>
-				<input type="text" placeholder="Update pieces"
-						   name="pieces" value=""
-								 required>
-				</p>
-				<p>
-				<h4> Update CM </h4>
-				<input type="text" placeholder="Update cm"
-						   name="cm" value="" required>
-				</p>
-				<p>
-				<h4> Update type: </h4>
-				<input type="text" placeholder="Update type"
-						   name="updateType" value=""
-							       required>
-				</p>
-				<p>
-				<input type="submit" value="Submit_Jumper" name="submit">
-				</p>
-			</form>
-		</div>
+        <div id = "jumperwireForm">
+            <form action="" method="POST">
+                <p>
+                <h4> Enter Jumper's wire type that you want to update </h4>
+                <input type="text" placeholder="Type"
+                                   name="type" value="" required>
+                </p>
+                <p>
+                <h4> Update pieces: </h4>
+                <input type="text" placeholder="Update pieces"
+                                   name="pieces" value=""
+                                                 required>
+                </p>
+                <p>
+                <h4> Update CM </h4>
+                <input type="text" placeholder="Update cm"
+                                   name="cm" value="" required>
+                </p>
+                <p>
+                <h4> Update type: </h4>
+                <input type="text" placeholder="Update type"
+                                   name="updateType" value=""
+                                                     required>
+                </p>
+                <p>
+                <input type="submit" value="Submit_Jumper" name="submit">
+                </p>
+            </form>
+        </div>
 
-		<div id = "resistorForm">
-			<form action="" method="POST">
-				<p>
-				<h4> Enter resistor's value that you want to update </h4>
-				<input type="text" placeholder="Value"
-						   name="value" value="" required>
-				</p>
-				<p>
-				<h4> Update pieces: </h4>
-				<input type="text" placeholder="Update pieces"
-						   name="pieces" value="" required>
-				</p>
-				<p>
-				<h4> Update value: </h4>
-				<input type="text" placeholder="Update values"
-						   name="updateValue" value=""
-								      required>
-				</p>
-				<p>
-				<input type="submit" value="Submit_resistor"
-						     name="submit">
-				</p>
-			</form>
-		</div>
-	</body>
+        <div id = "resistorForm">
+            <form action="" method="POST">
+                <p>
+                <h4> Enter resistor's value that you want to update </h4>
+                <input type="text" placeholder="Value"
+                                   name="value" value="" required>
+                </p>
+                <p>
+                <h4> Update pieces: </h4>
+                <input type="text" placeholder="Update pieces"
+                                   name="pieces" value="" required>
+                </p>
+                <p>
+                <h4> Update value: </h4>
+                <input type="text" placeholder="Update values"
+                                   name="updateValue" value=""
+                                                      required>
+                </p>
+                <p>
+                <input type="submit" value="Submit_resistor"
+                                     name="submit">
+                </p>
+            </form>
+        </div>
+    </body>
 
 </html>

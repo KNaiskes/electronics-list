@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="src/github.com/
-							KNaiskes/electronics-list/
-							static/css/style.css">
-		<title> Index </title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="src/github.com/
+        KNaiskes/electronics-list/
+        static/css/style.css">
+        <title> Index </title>
 
-	</head>
+    </head>
 
-	<body>
+    <body>
 
-		<div id="componentsTables">
-		<table>
-			<p> Leds </p>
-			<tr>
-				<th> Piece(s) </th>
-				<th> Color </th>
-			</tr>
+        <div id="componentsTables">
+            <table>
+                <p> Leds </p>
+                <tr>
+                    <th> Piece(s) </th>
+                    <th> Color </th>
+                </tr>
 
-			<tr>
-				{{ range $n := $.Leds }}
-				<td> {{ $n.Piece }} </td>
-				<td> {{ $n.Color }} </td>
-			</tr>
-				{{ end }}
-		</table>
+                <tr>
+                    {{ range $n := $.Leds }}
+                    <td> {{ $n.Piece }} </td>
+                    <td> {{ $n.Color }} </td>
+                </tr>
+                {{ end }}
+            </table>
 
-		<table>
-			<p> Boards </p>
-			<tr>
-				<th> Piece(s) </th>
-				<th> Name </th>
-				<th> Ethernet </th>
-				<th> Wifi </th>
-				<th> Version </th>
-			</tr>
+            <table>
+                <p> Boards </p>
+                <tr>
+                    <th> Piece(s) </th>
+                    <th> Name </th>
+                    <th> Ethernet </th>
+                    <th> Wifi </th>
+                    <th> Version </th>
+                </tr>
 
-			<tr>
-				{{ range $n := $.Board }}
-				<td> {{ $n.Piece }} </td>
-				<td> {{ $n.Name }} </td>
-				<td> {{ $n.HasEthernet }} </td>
-				<td> {{ $n.HasWifi }} </td>
-				<td> {{ $n.Version }} </td>
-			</tr>
-				{{ end }}
-		</table>
+                <tr>
+                    {{ range $n := $.Board }}
+                    <td> {{ $n.Piece }} </td>
+                    <td> {{ $n.Name }} </td>
+                    <td> {{ $n.HasEthernet }} </td>
+                    <td> {{ $n.HasWifi }} </td>
+                    <td> {{ $n.Version }} </td>
+                </tr>
+                {{ end }}
+            </table>
 
-		<table>
-			<p> Jumper wires </p>
-			<tr>
-				<th> Piece(s) </th>
-				<th> CM </th>
-				<th> Type </th>
-			</tr>
+            <table>
+                <p> Jumper wires </p>
+                <tr>
+                    <th> Piece(s) </th>
+                    <th> CM </th>
+                    <th> Type </th>
+                </tr>
 
-			<tr>
-				{{ range $n := $.Jumperwire }}
-				<td> {{ $n.Piece }} </td>
-				<td> {{ $n.Cm }} </td>
-				<td> {{ $n.Jtype }} </td>
-			</tr>
-				{{ end }}
-		</table>
+                <tr>
+                    {{ range $n := $.Jumperwire }}
+                    <td> {{ $n.Piece }} </td>
+                    <td> {{ $n.Cm }} </td>
+                    <td> {{ $n.Jtype }} </td>
+                </tr>
+                {{ end }}
+            </table>
 
-		<table>
-			<p> Resistors </p>
-			<tr>
-				<th> Piece(s) </th>
-				<th> Value </th>
-			</tr>
+            <table>
+                <p> Resistors </p>
+                <tr>
+                    <th> Piece(s) </th>
+                    <th> Value </th>
+                </tr>
 
-			<tr>
-				{{ range $n := $.Resistor }}
-				<td> {{ $n.Piece }} </td>
-				<td> {{ $n.Value }} </td>
-			</tr>
-				{{ end }}
-		</table>
-		</div>
+                <tr>
+                    {{ range $n := $.Resistor }}
+                    <td> {{ $n.Piece }} </td>
+                    <td> {{ $n.Value }} </td>
+                </tr>
+                {{ end }}
+            </table>
+        </div>
 
-	</body>
+    </body>
 
 </html>
