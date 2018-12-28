@@ -14,9 +14,9 @@ type Leds struct {
 type Board struct {
     Piece	    int
     Name	    string
-    HasEthernet bool
+    HasEthernet     bool
     HasWifi	    bool
-    Version     string
+    Version         string
 }
 
 type JumperWire struct {
@@ -35,6 +35,7 @@ type DatabaseInterface interface {
     DeleteComponent()
     ModifyComponent(m string)
     GetComponent() interface{}
+    CheckComponent(c string) bool
 }
 
 const driverDB = "sqlite3"
@@ -122,6 +123,24 @@ func (l Leds) ModifyComponent(m string) {
     }
 }
 
+func (l Leds) CheckComponent(c string) bool {
+    const query = `SELECT color FROM leds WHERE color=?`
+
+    db, err := sql.Open(driverDB, dbName)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    err = db.QueryRow(query, c).Scan(&c)
+    if err != nil {
+        if err != sql.ErrNoRows {
+            log.Fatal(err)
+        }
+        return false
+    }
+    return true
+}
+
 func (l Leds) GetComponent() interface{}  {
     const query = `SELECT piece, color FROM leds`
 
@@ -149,6 +168,23 @@ func (l Leds) GetComponent() interface{}  {
     return leds
 }
 
+func (b Board) CheckComponent(c string) bool {
+    const query = `SELECT name FROM boards WHERE name=?`
+
+    db, err := sql.Open(driverDB, dbName)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    err = db.QueryRow(query, c).Scan(&c)
+    if err != nil {
+        if err != sql.ErrNoRows {
+            log.Fatal(err)
+        }
+        return false
+    }
+    return true
+}
 func (b Board) GetComponent() interface{} {
     const query = `SELECT piece, name, ethernet, wifi, version FROM boards`
 
@@ -177,6 +213,23 @@ func (b Board) GetComponent() interface{} {
     }
 
     return boards
+}
+func (j JumperWire) CheckComponent(c string) bool {
+    const query = `SELECT type FROM jumperwires WHERE type=?`
+
+    db, err := sql.Open(driverDB, dbName)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    err = db.QueryRow(query, c).Scan(&c)
+    if err != nil {
+        if err != sql.ErrNoRows {
+            log.Fatal(err)
+        }
+        return false
+    }
+    return true
 }
 
 func (j JumperWire) GetComponent() interface{} {
@@ -305,6 +358,23 @@ func (j JumperWire) ModifyComponent(m string) {
         log.Fatal(err)
     }
 }
+func (r Resistor) CheckComponent(c string) bool {
+    const query = `SELECT value FROM resistors WHERE value=?`
+
+    db, err := sql.Open(driverDB, dbName)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    err = db.QueryRow(query, c).Scan(&c)
+    if err != nil {
+        if err != sql.ErrNoRows {
+            log.Fatal(err)
+        }
+        return false
+    }
+    return true
+}
 
 func (r Resistor) GetComponent() interface{} {
     const query = `SELECT piece, value FROM resistors`
@@ -397,4 +467,8 @@ func UpdateComponent(d DatabaseInterface, m string) {
 
 func ListComponent(l DatabaseInterface) interface{} {
     return l.GetComponent()
+}
+
+func ComponentExists(ch DatabaseInterface, c string) bool {
+    return ch.CheckComponent(c)
 }
