@@ -43,7 +43,6 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-
     tmpl.ExecuteTemplate(w, "index.html", nil)
 }
 
@@ -74,7 +73,9 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
         piecesInt, _ := strconv.Atoi(pieces)
 
         led := database.Leds{Piece: piecesInt, Color: color}
-        database.NewComponentDB(led)
+        if(!database.ComponentExists(led, led.Color)) {
+            database.NewComponentDB(led)
+        }
         break
     case "Submit_Board":
         pieces   := r.FormValue("pieces")
@@ -90,7 +91,9 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
         board := database.Board{Piece: piecesInt, Name: name,
         HasEthernet: ethernetBool, HasWifi: wifiBool,
         Version: version}
-        database.NewComponentDB(board)
+        if(!database.ComponentExists(board, board.Name)) {
+            database.NewComponentDB(board)
+        }
         break
     case "Submit_Jumper":
         pieces := r.FormValue("pieces")
@@ -102,7 +105,9 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
 
         jumperWire := database.JumperWire{Piece: piecesInt,
         Cm: cmFloat, Jtype: jtype}
-        database.NewComponentDB(jumperWire)
+        if(!database.ComponentExists(jumperWire, jtype)) {
+            database.NewComponentDB(jumperWire)
+        }
         break
     case "Submit_resistor":
         pieces := r.FormValue("pieces")
@@ -114,7 +119,9 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
         resistor := database.Resistor{Piece: piecesInt,
         Value: valueFloat}
 
-        database.NewComponentDB(resistor)
+        if(!database.ComponentExists(resistor, value)) {
+            database.NewComponentDB(resistor)
+        }
         break
     }
 
@@ -128,23 +135,31 @@ func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
     case "Submit_Led":
         color := r.FormValue("color")
         led := database.Leds{Color: color}
-        database.RemoveComponentDB(led)
+        if(database.ComponentExists(led, color)) {
+            database.RemoveComponentDB(led)
+        }
         break
     case "Submit_Board":
         name := r.FormValue("name")
         board := database.Board{Name: name}
-        database.RemoveComponentDB(board)
+        if(database.ComponentExists(board, name)) {
+            database.RemoveComponentDB(board)
+        }
         break
     case "Submit_Jumper":
         jtype := r.FormValue("type")
         jumperWire := database.JumperWire{Jtype: jtype}
-        database.RemoveComponentDB(jumperWire)
+        if(database.ComponentExists(jumperWire, jtype)) {
+            database.RemoveComponentDB(jumperWire)
+        }
         break
     case "Submit_resistor":
         value := r.FormValue("value")
         valueFloat, _ := strconv.ParseFloat(value, 32)
         resistor := database.Resistor{Value: valueFloat}
-        database.RemoveComponentDB(resistor)
+        if(database.ComponentExists(resistor, value)) {
+            database.RemoveComponentDB(resistor)
+        }
         break
     }
 
