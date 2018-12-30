@@ -64,6 +64,7 @@ func componentsHandler(w http.ResponseWriter, r *http.Request) {
 
 func addComponentHandler(w http.ResponseWriter, r *http.Request) {
     whichForm := r.FormValue("submit")
+    var formMsg string
 
     switch(whichForm) {
     case "Submit_Led":
@@ -75,6 +76,9 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
         led := database.Leds{Piece: piecesInt, Color: color}
         if(!database.ComponentExists(led, led.Color)) {
             database.NewComponentDB(led)
+            formMsg = "Led has been added to the list"
+        } else {
+            formMsg = "Led already exists"
         }
         break
     case "Submit_Board":
@@ -93,6 +97,9 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
         Version: version}
         if(!database.ComponentExists(board, board.Name)) {
             database.NewComponentDB(board)
+            formMsg = "Board has been added to the list"
+        } else {
+            formMsg = "Board already exists"
         }
         break
     case "Submit_Jumper":
@@ -107,6 +114,9 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
         Cm: cmFloat, Jtype: jtype}
         if(!database.ComponentExists(jumperWire, jtype)) {
             database.NewComponentDB(jumperWire)
+            formMsg = "Jumper wire has been added to the list"
+        } else {
+            formMsg = "Jumper wire already exists"
         }
         break
     case "Submit_resistor":
@@ -121,15 +131,19 @@ func addComponentHandler(w http.ResponseWriter, r *http.Request) {
 
         if(!database.ComponentExists(resistor, value)) {
             database.NewComponentDB(resistor)
+            formMsg = "Resistor has been added to the list"
+        } else {
+            formMsg = "Resistor already exists"
         }
         break
     }
 
-    tmpl.ExecuteTemplate(w, "add_component.html", nil)
+    tmpl.ExecuteTemplate(w, "add_component.html", formMsg)
 }
 
 func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
     whichForm := r.FormValue("submit")
+    var formMsg string
 
     switch(whichForm) {
     case "Submit_Led":
@@ -137,6 +151,9 @@ func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
         led := database.Leds{Color: color}
         if(database.ComponentExists(led, color)) {
             database.RemoveComponentDB(led)
+            formMsg = "Led has been removed from the list"
+        } else {
+            formMsg = "Led does not exist"
         }
         break
     case "Submit_Board":
@@ -144,6 +161,9 @@ func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
         board := database.Board{Name: name}
         if(database.ComponentExists(board, name)) {
             database.RemoveComponentDB(board)
+            formMsg = "Board has been removed from the list"
+        } else {
+            formMsg = "Board does not exist"
         }
         break
     case "Submit_Jumper":
@@ -151,6 +171,9 @@ func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
         jumperWire := database.JumperWire{Jtype: jtype}
         if(database.ComponentExists(jumperWire, jtype)) {
             database.RemoveComponentDB(jumperWire)
+            formMsg = "Jumper wire has been removed from the list"
+        } else {
+            formMsg = "Jumper wire does not exist"
         }
         break
     case "Submit_resistor":
@@ -159,11 +182,14 @@ func removeComponentHandler(w http.ResponseWriter, r *http.Request) {
         resistor := database.Resistor{Value: valueFloat}
         if(database.ComponentExists(resistor, value)) {
             database.RemoveComponentDB(resistor)
+            formMsg = "Resistor has been removed"
+        } else {
+            formMsg = "Resistor does not exist"
         }
         break
     }
 
-    tmpl.ExecuteTemplate(w, "remove_component.html", nil)
+    tmpl.ExecuteTemplate(w, "remove_component.html", formMsg)
 }
 
 func updateComponentHandler(w http.ResponseWriter, r *http.Request) {
@@ -217,14 +243,6 @@ func updateComponentHandler(w http.ResponseWriter, r *http.Request) {
 
         piecesInt, _ := strconv.Atoi(pieces)
         updatedValueFloat, _ := strconv.ParseFloat(updatedValue, 32)
-
-        //pieces := r.FormValue("pieces")
-        //value  := r.FormValue("value")
-        //updatedValue := r.FormValue("updateValue")
-
-        //piecesInt, _          := strconv.Atoi(pieces)
-        ////valueFloat, _         := strconv.ParseFloat(value, 32)
-        //updadateValueFloat, _ := strconv.ParseFloat(updatedValue, 32)
 
         resistor := database.Resistor{Piece: piecesInt,
         Value: updatedValueFloat}
