@@ -11,7 +11,7 @@ import (
 var tmpl *template.Template
 
 func init() {
-    tmpl = template.Must(template.ParseGlob("src/github.com/KNaiskes/electronics-list/static/html/*.html"))
+    tmpl = template.Must(template.ParseGlob("src/github.com/KNaiskes/electronics-list/static/templates/*.html"))
 }
 
 type Components struct {
