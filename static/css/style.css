@@ -1,8 +1,3 @@
-h1 {
-    color: blue;
-}
-
-
 #componentsTables table {
     border-collapse: collapse;
     width: 100%;
@@ -24,4 +19,29 @@ h1 {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+}
+
+#indexMenu ul {
+    list-style-type: none;
+}
+
+#indexMenu li:nth-child(even) {
+    background-color: #03396c;
+}
+
+#indexMenu li:nth-child(odd) {
+    background-color: #005b96;
+}
+
+#indexMenu a {
+    display: block;
+    text-align: center;
+    padding: 10px 10px;
+    width: 100%;
+    color: #F7FAFB;
+    text-decoration: none;
+}
+
+#indexMenu a:hover {
+    color: #008080;
 }
