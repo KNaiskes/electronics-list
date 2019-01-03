@@ -3,23 +3,22 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="src/github.com/
-                                                        KNaiskes/electronics-list/
-                                                        static/css/style.css">
+							KNaiskes/electronics-list/
+							static/css/style.css">
 
         <script src="src/github.com/KNaiskes/electronics-list/static/js/script.js"></script>
 
         <title> Update Component </title>
-        <style>
-#ledForm, #boardForm, #jumperwireForm, #resistorForm  { display: none; }
-        </style>
     </head>
 
     <body>
-        <h4> Update Component </h4>
-        <button onclick = "hideForm('ledForm')"> Led </button>
-        <button onclick = "hideForm('boardForm')"> Board </button>
-        <button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
-        <button onclick = "hideForm('resistorForm')"> Resistor </button>
+        <center><h2> Update a component </h2></center>
+        <div id="customButtons">
+            <button onclick = "hideForm('ledForm')"> Led </button>
+            <button onclick = "hideForm('boardForm')"> Board </button>
+            <button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
+            <button onclick = "hideForm('resistorForm')"> Resistor </button>
+        </div>
 
         <div id = "ledForm">
             <form action="" method="POST">
