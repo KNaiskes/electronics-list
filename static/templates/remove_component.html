@@ -14,11 +14,13 @@
     <body>
         {{ $msg := . }}
         <h1> {{ $msg }} </h1>
-        <h4> Remove Component </h4>
-        <button onclick = "hideForm('ledForm')"> Led </button>
-        <button onclick = "hideForm('boardForm')"> Board </button>
-        <button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
-        <button onclick = "hideForm('resistorForm')"> Resistor </button>
+        <center><h2> Remove a component </h2></center>
+        <div id="customButtons">
+            <button onclick = "hideForm('ledForm')"> Led </button>
+            <button onclick = "hideForm('boardForm')"> Board </button>
+            <button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
+            <button onclick = "hideForm('resistorForm')"> Resistor </button>
+        </div>
 
         <div id = "ledForm">
             <form action="" method="POST">
