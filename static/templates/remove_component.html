@@ -12,8 +12,6 @@
     </head>
 
     <body>
-        {{ $msg := . }}
-        <h1> {{ $msg }} </h1>
         <center><h2> Remove a component </h2></center>
 
         <div id="customButtons">
@@ -80,6 +78,7 @@
                 </p>
             </form>
         </div>
+        {{ $msg := . }}
+        <center><h3> {{ $msg }} </center></h3>
     </body>
-
 </html>
