@@ -15,13 +15,10 @@
         {{ $msg := . }}
         <h1> {{ $msg }} </h1>
         <center><h2> Remove a component </h2></center>
+
         <div id="customButtons">
             <button onclick = "hideForm('ledForm')"> Led </button>
-            <button onclick = "hideForm('boardForm')"> Board </button>
-            <button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
-            <button onclick = "hideForm('resistorForm')"> Resistor </button>
         </div>
-
         <div id = "ledForm">
             <form action="" method="POST">
                 <p>
@@ -35,6 +32,9 @@
             </form>
         </div>
 
+        <div id="customButtons">
+            <button onclick = "hideForm('boardForm')"> Board </button>
+        </div>
         <div id = "boardForm">
             <form action="" method="POST">
                 <p>
@@ -48,6 +48,9 @@
             </form>
         </div>
 
+        <div id="customButtons">
+            <button onclick = "hideForm('jumperwireForm')"> Jumper Wires </button>
+        </div>
         <div id = "jumperwireForm">
             <form action="" method="POST">
                 <p>
@@ -61,6 +64,9 @@
             </form>
         </div>
 
+        <div id="customButtons">
+            <button onclick = "hideForm('resistorForm')"> Resistor </button>
+        </div>
         <div id = "resistorForm">
             <form action="" method="POST">
                 <p>
