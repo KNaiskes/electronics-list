@@ -30,11 +30,19 @@ body {
 }
 
 #indexMenu li:nth-child(even) {
-    background-color: #d8d8d7;
+    background-color: #DAE0E5;
+}
+
+#indexMenu li:nth-child(even) a:hover {
+    background-color: #F3F9FF;
 }
 
 #indexMenu li:nth-child(odd) {
-    background-color: #90908F;
+    background-color: #60B5C5;
+}
+
+#indexMenu li:nth-child(odd) a:hover {
+    background-color: #7FC3D0;
 }
 
 #indexMenu a {
@@ -42,13 +50,9 @@ body {
     text-align: center;
     padding: 10px 10px;
     width: 100%;
-    color: #111111;
+    color: #000000;
     font-weight: bold;
     text-decoration: none;
-}
-
-#indexMenu a:hover {
-    color: #FFFFFF;
 }
 
 #ledForm, #boardForm, #jumperwireForm, #resistorForm  {
