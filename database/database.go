@@ -4,6 +4,7 @@ import (
     "database/sql"
     _ "github.com/mattn/go-sqlite3"
     "log"
+    "strings"
 )
 
 type Leds struct {
@@ -75,6 +76,12 @@ func CreateDB() {
     newTable(driverDB, queryBoard)
 }
 
+func modifyStrings(s string) string {
+    s = strings.ToLower(s)
+    s = strings.Title(s)
+    return s
+}
+
 func (l Leds) AddComponent() {
     const query = `INSERT INTO leds(piece, color) VALUES(?,?)`
 
@@ -84,6 +91,7 @@ func (l Leds) AddComponent() {
     }
 
     statement, err := db.Prepare(query)
+    l.Color = modifyStrings(l.Color)
     statement.Exec(l.Piece, l.Color)
 
     if err != nil {
@@ -131,6 +139,7 @@ func (l Leds) CheckComponent(c string) bool {
         log.Fatal(err)
     }
 
+    c = modifyStrings(c)
     err = db.QueryRow(query, c).Scan(&c)
     if err != nil {
         if err != sql.ErrNoRows {
@@ -176,6 +185,7 @@ func (b Board) CheckComponent(c string) bool {
         log.Fatal(err)
     }
 
+    c = modifyStrings(c)
     err = db.QueryRow(query, c).Scan(&c)
     if err != nil {
         if err != sql.ErrNoRows {
@@ -217,6 +227,7 @@ func (b Board) GetComponent() interface{} {
 func (j JumperWire) CheckComponent(c string) bool {
     const query = `SELECT type FROM jumperwires WHERE type=?`
 
+    c = modifyStrings(c)
     db, err := sql.Open(driverDB, dbName)
     if err != nil {
         log.Fatal(err)
@@ -270,6 +281,7 @@ func (b Board) AddComponent() {
     }
 
     statement, err := db.Prepare(query)
+    b.Name = modifyStrings(b.Name)
     statement.Exec(b.Piece, b.Name, b.HasEthernet, b.HasWifi, b.Version)
 
     if err != nil {
@@ -319,6 +331,7 @@ func (j JumperWire) AddComponent() {
     }
 
     statement, err := db.Prepare(query)
+    j.Jtype = modifyStrings(j.Jtype)
     statement.Exec(j.Piece, j.Cm, j.Jtype)
 
     if err != nil {
