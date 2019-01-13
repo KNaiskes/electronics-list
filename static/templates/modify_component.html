@@ -26,9 +26,7 @@
                 </p>
                 <p>
                 <h4> Update pieces: </h4>
-                <input type="text" placeholder="Update pieces"
-                                   name="pieces" value=""
-                                                 required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <h4> Update color: </h4>
                 <input type="text" placeholder="Update color"
@@ -53,8 +51,7 @@
                 </p>
                 <p>
                 <h4> Update pieces </h4>
-                <input type="text" placeholder="Update pieces"
-                                   name="pieces" value="" required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <p>
                 <h4> Update name </h4>
@@ -64,14 +61,19 @@
                 </p>
                 <p>
                 <h4> Ethernet value: </h4>
-                <input type="text" placeholder="Update ethernet"
-                                   name="ethernet" value=""
-                                                   required>
+                <select name="ethernet">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                </p>
                 </p>
                 <p>
                 <h4> WiFi value: </h4>
-                <input type="text" placeholder="Update WiFi"
-                                   name="wifi" value="" required>
+                <select name="wifi">
+                    <option value="true">True</option>
+                    <option value="flase">False</option>
+                </select>
+                </p>
                 </p>
                 <p>
                 <h4> Update version: </h4>
@@ -91,25 +93,31 @@
             <form action="" method="POST">
                 <p>
                 <h4> Enter Jumper's wire type that you want to update </h4>
-                <input type="text" placeholder="Type"
-                                   name="type" value="" required>
+                <select name="type">
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="male-male">Male-Male</option>
+                    <option value="female-female">Female-Female</option>
+                    <option value="male-female">Male-Female</option>
+                </select>
                 </p>
                 <p>
                 <h4> Update pieces: </h4>
-                <input type="text" placeholder="Update pieces"
-                                   name="pieces" value=""
-                                                 required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <p>
                 <h4> Update CM </h4>
-                <input type="text" placeholder="Update cm"
-                                   name="cm" value="" required>
+                <input type="number" name="cm" min="" max="" step="0.10">
                 </p>
                 <p>
                 <h4> Update type: </h4>
-                <input type="text" placeholder="Update type"
-                                   name="updateType" value=""
-                                                     required>
+                <select name="updateType">
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="male-male">Male-Male</option>
+                    <option value="female-female">Female-Female</option>
+                    <option value="male-female">Male-Female</option>
+                </select>
                 </p>
                 <p>
                 <input type="submit" value="Submit_Jumper" name="submit">
@@ -124,19 +132,15 @@
             <form action="" method="POST">
                 <p>
                 <h4> Enter resistor's value that you want to update </h4>
-                <input type="text" placeholder="Value"
-                                   name="value" value="" required>
+                <input type="number" name="value" min="" max="" step="0.10">
                 </p>
                 <p>
                 <h4> Update pieces: </h4>
-                <input type="text" placeholder="Update pieces"
-                                   name="pieces" value="" required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <p>
                 <h4> Update value: </h4>
-                <input type="text" placeholder="Update values"
-                                   name="updateValue" value=""
-                                                      required>
+                <input type="number" name="updateValue" min="" max="" step="0.10">
                 </p>
                 <p>
                 <input type="submit" value="Submit_resistor"
