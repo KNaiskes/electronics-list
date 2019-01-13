@@ -22,8 +22,7 @@
                 <h1> Add a new led </h1>
                 <p>
                 <h2> Pieces: </h2>
-                <input type="text" placeholder="Pieces"
-                                   name="pieces" value="" required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <p>
                 <h2> Color: </h2>
@@ -44,8 +43,7 @@
                 <h1> Add a new board </h1>
                 <p>
                 <h2> Pieces </h2>
-                <input type="text" placeholder="Pieces"
-                                   name="pieces" value="" required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <p>
                 <h2> Name </h2>
@@ -53,12 +51,16 @@
                                    name="name" value="" required>
                 </p>
                 <h2> Ethernet </h2>
-                <input type="text" placeholder="Ethernet"
-                                   name="ethernet" value="" required>
+                <select name="etherenet">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
                 </p>
                 <h2> WiFi </h2>
-                <input type="text" placeholder="WiFi"
-                                   name="wifi" value="" required>
+                <select name="wifi">
+                    <option value="true">True</option>
+                    <option value="flase">False</option>
+                </select>
                 </p>
                 <h2> Version </h2>
                 <input type="text" placeholder="Version"
@@ -78,18 +80,21 @@
                 <h2> Add a new jumper wires </h2>
                 <p>
                 <h2> Pieces: </h2>
-                <input type="text" placeholder="Pieces"
-                                   name="pieces" value="" required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <p>
                 <h2> CM: </h2>
-                <input type="text" placeholder="CM"
-                                   name="cm" value="" required>
+                <input type="number" name="cm" min="" max="" step="0.10">
                 </p>
                 <h2> Type: </h2>
                 <p>
-                <input typ="text" placeholder="Type"
-                                  name="type" value="" required>
+                <select name="type">
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="male-male">Male-Male</option>
+                    <option value="female-female">Female-Female</option>
+                    <option value="male-female">Male-Female</option>
+                </select>
                 </p>
                 <p>
                 <input type="submit" value="Submit_Jumper" name="submit">
@@ -105,13 +110,11 @@
                 <h1> Add a new resistor </h1>
                 <p>
                 <h2> Pieces: </h2>
-                <input type="text" placeholder="Pieces"
-                                   name="pieces" value="" required>
+                <input type="number" name="pieces" min="1" max="">
                 </p>
                 <p>
                 <h2> Value: </h2>
-                <input type="text" placeholder="Value"
-                                   name="value" value="" required>
+                <input type="number" name="value" min="" max="" step="0.10">
                 </p>
                 <p>
                 <input type="submit" value="Submit_resistor" name="submit">
