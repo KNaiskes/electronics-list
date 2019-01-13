@@ -84,6 +84,18 @@ body {
     box-sizing: border-box;
 }
 
+#ledForm input[type=number], #boardForm input[type=number],
+#jumperwireForm input[type=number], #resistorForm input[type=number] {
+    -webkit-appearance: none;
+    width: 50%;
+}
+
+select {
+    width: 50%;
+    border: 1px solid transparent;
+    background-color: #FFFFFF;
+}
+
 #customButtons button {
     background-color: #065535;
     color: #FFFFFF;
