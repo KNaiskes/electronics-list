@@ -113,3 +113,15 @@ select {
 #customButtons button:hover {
     background-color: #1E6649;
 }
+
+#backtoMenu a {
+    color: #468499;
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+#backtoMenu a:hover {
+    color: #5890A3;
+}
