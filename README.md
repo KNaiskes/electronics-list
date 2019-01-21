@@ -10,7 +10,7 @@ A project to easily keep track of electronics components such as leds, resistors
 
 ![alt screenshot](screenshot.gif)
 
-Building
+#### Building
 ```
 $git clone https://github.com/KNaiskes/electronics-list
 $cd electronics-list
