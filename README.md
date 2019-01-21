@@ -9,3 +9,11 @@ A project to easily keep track of electronics components such as leds, resistors
 - Modify/Update a component
 
 ![alt screenshot](screenshot.gif)
+
+Building
+```
+$git clone https://github.com/KNaiskes/electronics-list
+$cd electronics-list
+$go get -d ./...
+$go install
+```
